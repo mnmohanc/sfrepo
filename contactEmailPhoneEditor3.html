@@ -1,0 +1,78 @@
+<template>
+  <template if:true={loaded}>
+    <lightning-card title="Email & Phone Editor" icon-name="standard:contact">
+      <div class="slds-p-around_medium slds-grid slds-gutters">
+
+        <!-- LEFT COLUMN: Do Not Call + Phone -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <lightning-input
+            type="checkbox"
+            label="Do Not Call"
+            name="DoNotCall"
+            checked={doNotCall}
+            onchange={handleToggle}>
+          </lightning-input>
+
+          <!-- Show Phone only if DoNotCall is FALSE -->
+          <template if:false={doNotCall}>
+            <lightning-input
+              type="tel"
+              label="Phone"
+              name="Phone"
+              value={phone}
+              onchange={handleChange}
+              message-when-bad-input="Enter a valid phone number">
+            </lightning-input>
+          </template>
+        </div>
+
+        <!-- RIGHT COLUMN: Email Opt Out + Email -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <lightning-input
+            type="checkbox"
+            label="Email Opt Out"
+            name="HasOptedOutOfEmail"
+            checked={emailOptOut}
+            onchange={handleToggle}>
+          </lightning-input>
+
+          <!-- Show Email only if EmailOptOut is FALSE -->
+          <template if:false={emailOptOut}>
+            <lightning-input
+              type="email"
+              label="Email"
+              name="Email"
+              value={email}
+              onchange={handleChange}
+              message-when-bad-input="Enter a valid email address">
+            </lightning-input>
+          </template>
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="slds-p-horizontal_medium slds-p-bottom_medium slds-grid slds-wrap slds-gutters_small">
+        <div class="slds-col slds-grow-none">
+          <lightning-button
+            variant="brand"
+            label="Save"
+            onclick={handleSave}
+            disabled={saveDisabled}
+            class="slds-m-right_small">
+          </lightning-button>
+        </div>
+        <div class="slds-col slds-grow-none">
+          <lightning-button
+            label="Reset"
+            onclick={handleReset}
+            variant="neutral">
+          </lightning-button>
+        </div>
+      </div>
+    </lightning-card>
+  </template>
+
+  <template if:false={loaded}>
+    <lightning-spinner size="small"></lightning-spinner>
+  </template>
+</template>
