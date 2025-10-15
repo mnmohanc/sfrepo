@@ -1,0 +1,13 @@
+<template>
+  <template if:true={loaded}>
+    <lightning-card title="Contact Flags" icon-name="standard:contact">
+      <div class="slds-p-around_medium">
+        <p><strong>Do Not Call:</strong> {doNotCall}</p>
+        <p><strong>Email Opt Out:</strong> {emailOptOut}</p>
+      </div>
+    </lightning-card>
+  </template>
+  <template if:false={loaded}>
+    <lightning-spinner size="small"></lightning-spinner>
+  </template>
+</template>
